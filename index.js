@@ -8,16 +8,15 @@ const passport = require('passport');
 const app = express();
 const cors = require('cors')
 const port = process.env.PORT || 5050;
-const dbPort = process.env.DB_PORT || 27017;
-const dbUrl = process.env.DB_URL || "localhost";
-const dbCollection = process.env.DB_COLLECTION || "auth-test";
-//sets the required variables from Environment Variables.
-// mongoose.set('useCreateIndex', true);
-//fixes an issue with a depricated default in Mongoose.js
 
-// mongoose.connect(`mongodb://${dbUrl}/${dbCollection}`, {useNewUrlParser: true})
-//        .then(_ => console.log('Connected Successfully to MongoDB'))
-//        .catch(err => console.error(err));
+const dbUrl = 'mongodb+srv://test:iphone5s@cluster0-wzqml.mongodb.net/auth-test?retryWrites=true&w=majority'
+//sets the required variables from Environment Variables.
+mongoose.set('useCreateIndex', true);
+
+//fixes an issue with a depricated default in Mongoose.js
+mongoose.connect(dbUrl, {useNewUrlParser: true})
+       .then(_ => console.log('Connected Successfully to MongoDB'))
+       .catch(err => console.error(err));
 app.use(passport.initialize());
 //initializes the passport configuration.
 require('./passport/passport-config')(passport);
